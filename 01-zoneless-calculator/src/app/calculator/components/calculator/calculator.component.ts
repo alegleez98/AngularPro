@@ -37,7 +37,6 @@ export class CalculatorComponent {
       '*': 'X',
       '/': '÷/',
       'Enter': '=',
-      'Backspace': 'C'
     }
     const key = event.key;
     const keyValue = keyEquivalents[key] ?? key;
