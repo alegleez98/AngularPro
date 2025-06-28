@@ -8,6 +8,10 @@ button {
   @apply bg-indigo-700;
 }
 
+.is-pressed {
+  @apply bg-indigo-800;
+}
+
 /* ::ng-deep .is-command {
   @apply bg-indigo-700;
 } */
