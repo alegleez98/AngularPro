@@ -8,4 +8,12 @@ import { CalculatorButtonComponent } from "../calculator-button/calculator-butto
   styleUrl: './calculator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalculatorComponent { }
+export class CalculatorComponent {
+
+  handleClick( key: string) {
+    console.log(key);
+  }
+
+
+
+}
