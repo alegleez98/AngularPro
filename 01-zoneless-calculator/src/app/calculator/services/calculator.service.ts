@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 
 const numbers = ['0','1','2','3','4','5','6','7','8','9'];
 const operators = ['+','-','*','/'];
@@ -16,7 +16,7 @@ export class CalculatorService {
   public construcNumber ( value: string ): void {
 
     //validar input
-    if([...numbers, ...operators, ...specialOperators].includes(value)) {
+    if(![...numbers, ...operators, ...specialOperators].includes(value)) {
       console.log('Invalid input', value);
       return;
     }
@@ -39,6 +39,7 @@ export class CalculatorService {
         return;
       }
       this.resultText.update( previousValue => previousValue.slice(0,-1));
+      return;
     }
 
     //aplicar operadores
@@ -46,6 +47,12 @@ export class CalculatorService {
       this.lastOperator.set(value);
       this.subResultText.set(this.resultText());
       this.resultText.set('0');
+      return;
+    }
+
+    //Limiter número de caracteres
+    if ( this.resultText().length >= 10) {
+      console.log('Max length reached');
       return;
     }
 
@@ -57,6 +64,34 @@ export class CalculatorService {
       this.resultText.update((text) => text + '.');
       return;
     }
+
+    //Manejo del 0 inicial
+    if (value === '0' && (this.resultText() === '0' || this.resultText() === '-0')) return;
+
+    //Cambio de signo
+    if (value === '+/-') {
+      if ( this.resultText().includes('-')) {
+        this.resultText.update((text) => text.slice(1));
+        return;
+      }
+
+      this.resultText.update((text) => '-' + text);
+      return;
+    }
+    //Números
+    if (numbers.includes(value)) {
+      if (this.resultText() === '0' || this.resultText() === '-0' ) {
+        if( this.resultText().includes('-')) {
+          this.resultText.set('-'+value);
+          return;
+        }
+        this.resultText.set(value);
+        return;
+      }
+      this.resultText.update(text => text + value);
+      return;
+    }
+
   }
 
 }

@@ -26,7 +26,7 @@ export class CalculatorComponent {
   // }
 
   handleClick( key: string) {
-    console.log(key);
+    this.calculatorService.construcNumber(key);
   }
 
   //@HostListener('document:keyup', ['$event'])
