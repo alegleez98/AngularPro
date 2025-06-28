@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+.is-command {
+  @apply bg-indigo-700;
+}
