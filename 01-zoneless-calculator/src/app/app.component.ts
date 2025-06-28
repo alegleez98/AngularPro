@@ -4,7 +4,7 @@ import { CalculatorComponent } from "./calculator/components/calculator/calculat
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CalculatorComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
