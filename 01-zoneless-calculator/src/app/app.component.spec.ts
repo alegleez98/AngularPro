@@ -36,4 +36,21 @@ describe('AppComponent', () => {
   it('should render router-outlet', () => {
     expect(compiled.querySelector('router-outlet')).not.toBeNull();
   });
+
+  it('should render router-outlet wrapped with css classes', () => {
+    const divElement: HTMLElement | null = compiled.querySelector('div');
+
+    const cssClasses = 'min-w-screen min-h-screen bg-slate-600 flex items-center justify-center px-5 py-5';
+    const cssClassesArray = cssClasses.split(' ');
+    const divClasses = divElement?.classList.value.split(' ');
+
+    // expect(cssClasses).not.toBeNull();
+    // divElement?.classList.forEach(className => {
+    //   expect(cssClasses).toContain(className);
+    // });
+    expect(cssClasses).not.toBeNull();
+    cssClassesArray.forEach(className => {
+      expect(divClasses).toContain(className);
+    });
+  })
 });
