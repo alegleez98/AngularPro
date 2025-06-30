@@ -60,7 +60,7 @@ export class CalculatorService {
 
     if (value === '.' && !this.resultText().includes('.')) {
       if (this.resultText() === '0' || this.resultText() === '') {
-        this.resultText.update( text => text + '0.');
+        this.resultText.set('0.');
         return;
       }
       this.resultText.update((text) => text + '.');
