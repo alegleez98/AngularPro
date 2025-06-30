@@ -122,6 +122,40 @@ describe('CalculatorService', () => {
 
   });
 
+  it('should handle +/- correctly', () => {
+
+    service.construcNumber('1');
+    service.construcNumber('+/-');
+
+    expect(service.resultText()).toBe('-1');
+    service.construcNumber('+/-');
+    expect(service.resultText()).toBe('1');
+
+  });
+
+
+  it('should handle backspace correctly', () => {
+
+    service.resultText.set('1234');
+    service.construcNumber('Backspace');
+
+    expect(service.resultText()).toBe('123');
+    service.construcNumber('Backspace');
+    expect(service.resultText()).toBe('12');
+
+  });
+
+  it('should handle max length correctly', () => {
+
+    for (let i = 0; i< 10;i++) {
+      service.construcNumber('1');
+    }
+    expect(service.resultText().length).toBe(10);
+    service.construcNumber('1');
+    expect(service.resultText().length).toBe(10);
+
+  });
+
 
 
 });
