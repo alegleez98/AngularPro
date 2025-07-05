@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatorComponent } from './calculator.component';
 import { CalculatorService } from '@/calculator/services/calculator.service';
-import { inject } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 
@@ -82,6 +81,29 @@ describe('CalculatorComponent', () => {
     expect(buttons[0].textContent?.trim()).toBe('C');
     expect(buttons[1].textContent?.trim()).toBe('+/-');
     expect(buttons[2].textContent?.trim()).toBe('%');
+  });
+
+  it('should handle keyboard events correctly', () => {
+    const eventEnter = new KeyboardEvent('keyup', { key: 'Enter' });
+    document.dispatchEvent(eventEnter);
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('=');
+
+    const eventESC = new KeyboardEvent('keyup', { key: 'Escape' });
+    document.dispatchEvent(eventESC);
+    expect(mockCalculatorService.constructNumber).toHaveBeenCalledWith('C');
+  });
+
+  it('should display result text correctly', () => {
+    mockCalculatorService.resultText.and.returnValue('123');
+    mockCalculatorService.subResultText.and.returnValue('10');
+    mockCalculatorService.lastOperator.and.returnValue('-');
+    fixture.detectChanges();
+
+    expect(component.resultText()).toBe('123');
+
+    expect(compiled.querySelector('#sub-result')?.textContent).toContain(
+      '10 -'
+    );
   });
 
 });

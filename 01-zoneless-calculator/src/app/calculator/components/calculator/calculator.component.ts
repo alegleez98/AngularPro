@@ -26,7 +26,7 @@ export class CalculatorComponent {
   // }
 
   handleClick( key: string) {
-    this.calculatorService.construcNumber(key);
+    this.calculatorService.constructNumber(key);
   }
 
   //@HostListener('document:keyup', ['$event'])
@@ -38,6 +38,7 @@ export class CalculatorComponent {
       '/': '÷/',
       'Enter': '=',
     }
+    console.log(event.key);
     const key = event.key;
     const keyValue = keyEquivalents[key] ?? key;
     this.handleClick(keyValue);
