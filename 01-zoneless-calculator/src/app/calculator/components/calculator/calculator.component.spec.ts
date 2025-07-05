@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CalculatorComponent } from './calculator.component';
 import { CalculatorService } from '@/calculator/services/calculator.service';
+import { inject } from '@angular/core';
 
 class MockCalculatorService {
   public resultText = jasmine.createSpy('resultText').and.returnValue('200.00');
@@ -15,6 +16,7 @@ describe('CalculatorComponent', () => {
   let fixture: ComponentFixture<CalculatorComponent>;
   let compiled: HTMLElement;
   let component: CalculatorComponent;
+  let mockCalculatorService: MockCalculatorService;
 
 
   beforeEach(async () => {
@@ -32,7 +34,9 @@ describe('CalculatorComponent', () => {
     compiled = fixture.nativeElement as HTMLElement;
     component = fixture.componentInstance;
 
-    fixture.detectChanges();
+    mockCalculatorService = TestBed.inject(CalculatorService) as unknown as MockCalculatorService;
+
+    //fixture.detectChanges();
   });
 
   it('should create the app', () => {
@@ -43,5 +47,19 @@ describe('CalculatorComponent', () => {
     expect(component.resultText()).toBe('200.00');
     expect(component.subResultText()).toBe('0');
     expect(component.lastOperator()).toBe('+');
-  })
+  });
+
+  it('should display proper calculation values', () => {
+
+    mockCalculatorService.resultText.and.returnValue('123');
+    mockCalculatorService.subResultText.and.returnValue('456');
+    mockCalculatorService.lastOperator.and.returnValue('*');
+
+    fixture.detectChanges();
+
+    expect(component.resultText()).toBe('123');
+    expect(component.subResultText()).toBe('456');
+    expect(component.lastOperator()).toBe('*');
+  });
+
 });
