@@ -1,16 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
 import { CalculatorComponent } from './calculator.component';
+import { CalculatorService } from '@/calculator/services/calculator.service';
 
-@Component({
-  standalone: true,
-  imports: [CalculatorComponent],
-  template: `<calculator-button>
-               <span class="projected-content underline">Test content</span>
-             </calculator-button>`
+class MockCalculatorService {
+  public resultText = jasmine.createSpy('resultText').and.returnValue('200.00');
+  public subResultText = jasmine.createSpy('subResultText').and.returnValue('0');
+  public lastOperator = jasmine.createSpy('lastOperator').and.returnValue('+');
 
-})
-class TestHostComponent {}
+  public constructNumber = jasmine.createSpy('constructNumber');
+}
 
 describe('CalculatorComponent', () => {
 
@@ -22,6 +20,12 @@ describe('CalculatorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CalculatorComponent],
+      providers: [
+        {
+          provide: CalculatorService,
+          useClass: MockCalculatorService
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CalculatorComponent);
@@ -34,4 +38,10 @@ describe('CalculatorComponent', () => {
   it('should create the app', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have the current getters', () => {
+    expect(component.resultText()).toBe('200.00');
+    expect(component.subResultText()).toBe('0');
+    expect(component.lastOperator()).toBe('+');
+  })
 });
