@@ -75,7 +75,6 @@ describe('CalculatorButtonComponent', () => {
   it('should display projected content', () => {
     const testHostFixture = TestBed.createComponent(TestHostComponent);
     const compiled = testHostFixture.nativeElement as HTMLDivElement;
-    console.log(compiled);
     expect(compiled.querySelector('.projected-content')).not.toBeNull();
     expect(compiled.querySelector('.projected-content')?.classList.contains('underline')).toBeTrue();
 
