@@ -82,3 +82,17 @@ Puntualmente veremos:
 Es una sección grande en la cual quiero que cubramos todo lo posible de nuestra calculadora para comprender muchos posibles panoramas.
 
 Es importante que hagamos este testing, porque en secciones siguientes, asumiré que pasaron por esta sección para tratar de evitar realizar pruebas iguales una y otra vez.
+
+## Sección 5: SSR-SSG-Hydration
+En esta sección dejaremos las bases de la generación de aplicaciones de Angular usando Server Side Rendering (SSR) y un poco de Static Site Generation (SSG).
+
+Puntualmente veremos:
+
+    - SPA -> Server Side
+    - Ejecutar código únicamente en el servidor y/o cliente
+    - SEO metatags
+    - Title
+    - Despliegues
+    - Consideraciones importantes en Angular SSR
+
+Es una sección relativamente pequeña, pero muy útil para todos aquellos que quieran transformar sus SPAs a aplicaciones generadas del lado del servidor y tener los beneficios que SSR y SSG.
